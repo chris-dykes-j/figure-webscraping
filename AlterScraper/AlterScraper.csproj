@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="HtmlAgilityPack">
+        <HintPath>..\..\..\.nuget\packages\htmlagilitypack\1.11.46\lib\netstandard2.0\HtmlAgilityPack.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+</Project>

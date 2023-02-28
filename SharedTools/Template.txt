@@ -1,0 +1,17 @@
+// Input which year/years to scrape.
+
+// Create new csv file.
+
+// Create header to mimic regular user. Great way to learn about request headers.
+
+// Make list of links. <a> tags with /products/ href.
+
+// Make timed requests to each link, and get data.
+
+// Add each line to a csv file.
+
+// Save images to a separate directories?
+
+// ?
+
+// Profit.

@@ -12,7 +12,7 @@ const string csvPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper/
 if (!File.Exists(csvPath))
 {
     await using var writer = File.CreateText(csvPath);
-    writer.WriteLine("name,series,character,release,price,size,sculptor,painter,material,brand");
+    writer.WriteLine("name,series,character,release,price,size,sculptor,painter,material,brand,url,blog_url");
 }
 
 var httpClient = new HttpClient();
@@ -49,19 +49,29 @@ foreach (var link in homePage.DocumentNode.SelectNodes("//figure/a"))
     Console.WriteLine(result);
 }
 
+Console.WriteLine("Scraping complete!");
+
 async Task<string> ParseFigurePage(HtmlDocument figurePage, string figureLink)
 {
     var name = figurePage.DocumentNode.SelectSingleNode($"//h1[@class='hl06 c-{section}']");
     var tableItems = figurePage.DocumentNode.SelectNodes("//td");
     var material = figurePage.DocumentNode.SelectSingleNode("//span[@class='txt']");
+    var blogLinks = figurePage.DocumentNode.SelectNodes("//div[@class='imgtxt imgtxt-type-b img-l']//a");
     
     var result = $"\"{name.InnerText}\","; 
     foreach (var item in tableItems)
     {
         result += $"\"{item.InnerHtml}\",".Replace("<br>", " ");
     }
-    result += $"\"{material.InnerText}\",{brand}";
+    result += $"\"{material.InnerText}\",{brand},{figureLink},";
 
+    result += "\"";
+    foreach (var blogLink in blogLinks)
+    {
+        result += $"{blogLink.Attributes["href"].Value},";
+    }
+    result += "\"";
+    
     await GetFigureImages(figurePage, name.InnerText, figureLink);
     
     return Regex.Replace(result, @"\p{Cc}", "");
@@ -75,7 +85,7 @@ async Task GetFigureImages(HtmlDocument figurePage, string name, string referrer
         Directory.CreateDirectory(path);
     }
     
-    var firstImage = figurePage.DocumentNode.SelectSingleNode("//div[@class='item-mainimg']//img");// .FirstChild("//img");
+    var firstImage = figurePage.DocumentNode.SelectSingleNode("//div[@class='item-mainimg']//img");
     var firstImagePath = firstImage.Attributes["src"].Value;
     using var figureRequest = new HttpRequestMessage(HttpMethod.Get, $"https://alter-web.jp/{firstImagePath}");
     figureRequest.Headers.Referrer = new Uri(referrer);
@@ -95,6 +105,17 @@ async Task GetFigureImages(HtmlDocument figurePage, string name, string referrer
         imageRequest.Headers.Referrer = new Uri(referrer);
         await using var streamToRead = await httpClient.SendAsync(imageRequest).Result.Content.ReadAsStreamAsync();
         await using var streamToWrite = File.Open($"{path}/{imagePath[17..]}", FileMode.Create);
+        await streamToRead.CopyToAsync(streamToWrite);
+    }
+
+    var iconLinks = figurePage.DocumentNode.SelectNodes("//div[@class='imgtxt imgtxt-type-b img-l']//img");
+    foreach (var iconLink in iconLinks)
+    {
+        var iconPath = iconLink.Attributes["src"].Value;
+        using var iconRequest = new HttpRequestMessage(HttpMethod.Get, $"https://alter-web.jp{iconPath}");
+        iconRequest.Headers.Referrer = new Uri(referrer);
+        await using var streamToRead = await httpClient.SendAsync(iconRequest).Result.Content.ReadAsStreamAsync();
+        await using var streamToWrite = File.Open($"{path}/{iconPath[20..]}", FileMode.Create);
         await streamToRead.CopyToAsync(streamToWrite);
     }
 }

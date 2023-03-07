@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
@@ -73,7 +72,7 @@ async Task<string> ParseFigurePage(HtmlDocument figurePage, string figureLink, i
     foreach (var item in tableItems)
     {
         result += $"\"{item.InnerHtml}\",".Replace("<br>", " ")
-            .Replace("<span class=\"resale c-figure\">再販</span>", " ");
+            .Replace($"<span class=\"resale c-{section}\">再販</span>", " ");
     }
     result += $"\"{material.InnerText}\",{brand},{figureLink},";
 

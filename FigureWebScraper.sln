@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodSmileScraper", "GoodSmi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScraperTools", "ScraperTools\ScraperTools.csproj", "{F9BF9DB3-09E4-45F4-B5F4-19F4AFB1FB10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterNormalization", "AlterNormalization\AlterNormalization.csproj", "{A4BB2BC0-341A-4590-9CF0-A84CC448000A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{F9BF9DB3-09E4-45F4-B5F4-19F4AFB1FB10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9BF9DB3-09E4-45F4-B5F4-19F4AFB1FB10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9BF9DB3-09E4-45F4-B5F4-19F4AFB1FB10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4BB2BC0-341A-4590-9CF0-A84CC448000A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4BB2BC0-341A-4590-9CF0-A84CC448000A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4BB2BC0-341A-4590-9CF0-A84CC448000A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4BB2BC0-341A-4590-9CF0-A84CC448000A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

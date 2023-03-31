@@ -2,22 +2,18 @@ namespace AlterNormalization.Processors;
 
 public abstract class CsvProcessor
 {
-    public string SourcePath { get; }
     public string OutputPath { get; }
     
-    protected CsvProcessor(string sourcePath, string outputPath)
+    protected CsvProcessor(string outputPath)
     {
-        SourcePath = sourcePath;
         OutputPath = outputPath;
+        CreateOutputFile(); // Breaks single responsibility but w/e.
     }
-    
-    protected void CreateOutputFile()
+
+    private void CreateOutputFile()
     {
         using var streamWriter = File.Create(OutputPath);
     }
-    
-    public abstract string ProcessFirstLine();
-    public abstract string ProcessLine(string line);
 
     protected List<string> SplitIgnoringQuotes(string line, char delimiter)
     {
@@ -39,4 +35,7 @@ public abstract class CsvProcessor
 
         return result;
     }
+    
+    public abstract string ProcessFirstLine();
+    public abstract string ProcessLine(string line);
 }

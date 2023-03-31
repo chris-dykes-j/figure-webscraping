@@ -4,11 +4,10 @@ namespace AlterNormalization.Processors;
 
 public class FiguresCsvProcessor : CsvProcessor
 {
-    public FiguresCsvProcessor(string sourcePath, string outputPath) : base(sourcePath, outputPath) { }
+    public FiguresCsvProcessor(string outputPath) : base(outputPath) { }
 
     public override string ProcessFirstLine()
     {
-        CreateOutputFile(); // Breaks single responsibility but w/e.
         return "name,series,character,scale,brand,origin_url";
     }
 

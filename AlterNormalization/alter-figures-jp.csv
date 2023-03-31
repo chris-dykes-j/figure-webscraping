@@ -1,4 +1,4 @@
-name,series,character,scale,brand,url
+name,series,character,scale,brand,origin_url
 フォーミダブル,アズールレーン,AZUR LANE HMS Formidable,1/7,Alter,https://alter-web.jp/products/503/
 鷺沢 文香　潮風の一頁Ver.,アイドルマスター シンデレラガールズ,THE IDOLM@STER CINDERELLA GIRLS Sagisawa Fumika,1/7,Alter,https://alter-web.jp/products/507/
 キャスター／紫式部,Fate/Grand Order,Fate/Grand Order Caster/Murasaki Shikibu,1/7,Alter,https://alter-web.jp/products/508/
@@ -200,7 +200,7 @@ Fate/EXTRA セイバーエクストラ　水着Ver.,Fate/EXTRA,,1/6,Alter,https:
 μ-No.12-（ミュー・テュエルブ）,BLAZBLUE　ALTER MEMORY,,1/7,Alter,https://alter-web.jp/products/57/
 宝蔵院胤舜,百花繚乱,,1/8,Alter,https://alter-web.jp/products/75/
 式波・アスカ・ラングレー　ジャージVer.,ヱヴァンゲリヲン新劇場版：Q,,1/7,Alter,https://alter-web.jp/products/119/
-ベートーヴェン,英雄＊戦姫GOLD,,scale,Alter,https://alter-web.jp/products/72/
+ベートーヴェン,英雄＊戦姫GOLD,,,Alter,https://alter-web.jp/products/72/
 ハイデマリー・W・シュナウファー,ストライクウィッチーズ劇場版,,1/8,Alter,https://alter-web.jp/products/73/
 春日野 穹　黒チャイナドレスVer.,ヨスガノソラ,,1/7,Alter,https://alter-web.jp/products/69/
 テイルズ オブ ゼスティリア　アリーシャ,テイルズ オブ ゼスティリア,,1/8,Alter,https://alter-web.jp/products/67/
@@ -378,7 +378,7 @@ ALVIS & LAVIE BY LASTEXILE,LASTEXILE,,1/8,Alter,https://alter-web.jp/products/46
 ルイズ　制服Ver.,ゼロの使い魔 ～三美姫の輪舞～,,1/8,Alter,https://alter-web.jp/products/372/
 戦姫,戦国ランス,,1/8,Alter,https://alter-web.jp/products/373/
 長門 有希　制服Ver.,涼宮ハルヒの憂鬱,,1/8,Alter,https://alter-web.jp/products/375/
-リインフォースII,魔法少女リリカルなのはStrikerS,,scale,Alter,https://alter-web.jp/products/347/
+リインフォースII,魔法少女リリカルなのはStrikerS,,,Alter,https://alter-web.jp/products/347/
 ヨマコ先生,天元突破グレンラガン,,1/8,Alter,https://alter-web.jp/products/371/
 Xenosaga Ⅲ　KOS-MOS　水着Ver.,ゼノサーガ エピソードⅢ [ツァラトゥストラはかく語りき],,1/6,Alter,https://alter-web.jp/products/170/
 シグナム,魔法少女リリカルなのはStrikerS,,1/7,Alter,https://alter-web.jp/products/369/
@@ -396,7 +396,7 @@ Xenosaga Ⅲ　KOS-MOS　水着Ver.,ゼノサーガ エピソードⅢ [ツァ�
 ユニゾンヴィータ,魔法少女リリカルなのはStrikerS,,1/7,Alter,https://alter-web.jp/products/357/
 リリィ・サルバターナ,続・殺戮のジャンゴ -地獄の賞金首-,,1/8,Alter,https://alter-web.jp/products/358/
 鷹守 ハルカ,超昂閃忍ハルカ,,1/8,Alter,https://alter-web.jp/products/360/
-チューア・チュラム,Chu×Chuアイドる,,scale,Alter,https://alter-web.jp/products/354/
+チューア・チュラム,Chu×Chuアイドる,,,Alter,https://alter-web.jp/products/354/
 月城 ミーナ,月面兎兵器ミーナ,,1/8,Alter,https://alter-web.jp/products/355/
 朝比奈 みくる　メイドVer.,涼宮ハルヒの憂鬱,,1/8,Alter,https://alter-web.jp/products/352/
 趙雲 子龍,一騎当千 Dragon Destiny,,1/8,Alter,https://alter-web.jp/products/353/
@@ -404,7 +404,7 @@ Xenosaga Ⅲ　KOS-MOS　水着Ver.,ゼノサーガ エピソードⅢ [ツァ�
 シエスタ,ゼロの使い魔 ～双月の騎士～,,1/8,Alter,https://alter-web.jp/products/350/
 桐条 美鶴,ペルソナ３ フェス,,1/8,Alter,https://alter-web.jp/products/351/
 ヨルズ,めがちゅ！,,1/8,Alter,https://alter-web.jp/products/346/
-リインフォースII,魔法少女リリカルなのはStrikerS,,scale,Alter,https://alter-web.jp/products/347/
+リインフォースII,魔法少女リリカルなのはStrikerS,,,Alter,https://alter-web.jp/products/347/
 関羽 雲長,一騎当千 Dragon Destiny,,1/8,Alter,https://alter-web.jp/products/348/
 閻魔 あい,地獄少女,,1/8,Alter,https://alter-web.jp/products/349/
 フェイト・テスタロッサ,魔法少女リリカルなのはA's,,1/8,Alter,https://alter-web.jp/products/295/
@@ -423,7 +423,7 @@ Xenosaga Ⅲ　KOS-MOS　水着Ver.,ゼノサーガ エピソードⅢ [ツァ�
 レウコテア,めがちゅ！,,1/8,Alter,https://alter-web.jp/products/326/
 セイバー　メイドVer.,Fate/hollow ataraxia,,1/6,Alter,https://alter-web.jp/products/267/
 カミナギ・リョーコ,ゼーガペイン,,1/8,Alter,https://alter-web.jp/products/322/
-真紅,ローゼンメイデン,,scale,Alter,https://alter-web.jp/products/324/
+真紅,ローゼンメイデン,,,Alter,https://alter-web.jp/products/324/
 アルクェイド・ブリュンスタッド,MELTY BLOOD,,1/8,Alter,https://alter-web.jp/products/319/
 天羽 雅音　ウィッチブレイド発動態パワーアップVer.,ウィッチブレイド,,1/8,Alter,https://alter-web.jp/products/320/
 荻上 千佳　コスプレVer.,くじびきアンバランス,,1/8,Alter,https://alter-web.jp/products/317/

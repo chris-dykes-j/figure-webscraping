@@ -1,56 +1,34 @@
-using System.Text.RegularExpressions;
+using AlterNormalization.Processors;
 
 const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper/alter-jp.csv";
 
 string CsvPath(string tableName) => 
-    $"/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/alter-{tableName}-jp-test.csv";
+    $"/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/alter-{tableName}-jp.csv";
 
-using var streamWriter = File.CreateText(CsvPath("figures"));
 using var streamReader = new StreamReader(readPath);
+
+var csvProcessors = new List<CsvProcessor>
+{
+    new FiguresCsvProcessor(readPath, CsvPath("figures"))
+};
 
 Console.WriteLine("Starting normalization");
 var isFirstLine = true;
 while (!streamReader.EndOfStream)
 {
     var line = streamReader.ReadLine();
-    if (isFirstLine)
+
+    foreach (var csvProcessor in csvProcessors) // may want to move internal logic to CsvProcessor classes.
     {
-        File.AppendAllText(CsvPath("figures"), "name,series,character,scale,brand,origin_url\n");
-        isFirstLine = false;
-        continue;
+        var outputLine = isFirstLine ? csvProcessor.ProcessFirstLine() : csvProcessor.ProcessLine(line!);
+        File.AppendAllText(csvProcessor.OutputPath, outputLine + '\n');
+        Console.WriteLine(outputLine);
     }
-    var columns = SplitIgnoringQuotes(line!, ',');
-    var scaleRegex = new Regex(@"^1\/[1-9]");
-    var figureScale = scaleRegex.Match(columns[5]).ToString();
-    //var size = scaleRegex.Replace(columns[5], "").Replace("スケール", "");
-    
-    // Figures table
-    var figuresValues = $"{columns[0]},{columns[1]},{columns[2]},{figureScale},{columns[9]},{columns[10]}";
-    File.AppendAllText(CsvPath("figures"), figuresValues + '\n');
-    Console.WriteLine(figuresValues);
+    isFirstLine = false;
 }
 
-// Thx chat-gpt
-List<string> SplitIgnoringQuotes(string line, char delimiter)
-{
-    var result = new List<string>();
-    var inQuotes = false;
-    var start = 0;
+//var size = scaleRegex.Replace(columns[5], "").Replace("スケール", "");
 
-    for (var i = 0; i < line.Length; i++)
-    {
-        if (line[i] == '"') inQuotes = !inQuotes;
-
-        if (line[i] == delimiter && !inQuotes)
-        {
-            result.Add(line.Substring(start, i - start).Trim('\"', ' '));
-            start = i + 1;
-        }
-    }
-    result.Add(line[start..].Trim('\"', ' '));
-
-    return result;
-}
 // Handle repeating groups in release, price, sculptor, painter, material, blog_url
 
 // Separate year and month.

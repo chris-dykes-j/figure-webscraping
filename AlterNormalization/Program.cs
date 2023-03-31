@@ -1,8 +1,5 @@
 
-using System.Globalization;
 using System.Text.RegularExpressions;
-using AlterNormalization;
-using CsvHelper;
 
 const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper/alter-jp.csv";
 

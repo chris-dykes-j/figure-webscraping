@@ -2,12 +2,11 @@ using AlterNormalization.Processors;
 
 const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper/alter-jp.csv";
 
-string WritePath(string tableName) => $"/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/alter-{tableName}-jp.csv";
-
 var csvProcessors = new List<CsvProcessor> // More to be added.
 {
-    new FiguresCsvProcessor(WritePath("figures")),
-    new ReleaseCsvProcessor(WritePath("release-dates"))
+    new FiguresCsvProcessor("figures"),
+    new ReleaseCsvProcessor("release-dates"),
+    new PriceCsvProcessor("prices")
 };
 
 Console.WriteLine("Starting normalization");

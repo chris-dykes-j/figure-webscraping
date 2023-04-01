@@ -2,7 +2,7 @@ namespace AlterNormalization.Processors;
 
 public class ReleaseCsvProcessor : CsvProcessor
 {
-    public ReleaseCsvProcessor(string outputPath) : base(outputPath) { }
+    public ReleaseCsvProcessor(string outPath) : base(outPath) { }
 
     public override string ProcessFirstLine() => "name,year,month\n";
 
@@ -14,7 +14,9 @@ public class ReleaseCsvProcessor : CsvProcessor
         foreach (var date in dates)
         {
             if (!string.IsNullOrWhiteSpace(date))
+            {
                 result += $"{columns[0]},{date[0..4]},{date[5..7].Trim('月')}\n";
+            }
         }
         return result;
     }

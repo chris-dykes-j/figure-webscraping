@@ -4,12 +4,15 @@ public abstract class CsvProcessor
 {
     public string OutputPath { get; }
     
-    protected CsvProcessor(string outputPath)
+    protected CsvProcessor(string outPath)
     {
-        OutputPath = outputPath;
+        OutputPath = WritePath(outPath);
         CreateOutputFile(); // Breaks single responsibility but w/e.
     }
 
+    private string WritePath(string tableName) => 
+        $"/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/Output/alter-{tableName}-jp.csv";
+    
     private void CreateOutputFile()
     {
         using var streamWriter = File.Create(OutputPath);

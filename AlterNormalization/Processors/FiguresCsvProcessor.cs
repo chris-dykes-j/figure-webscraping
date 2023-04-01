@@ -4,7 +4,7 @@ namespace AlterNormalization.Processors;
 
 public class FiguresCsvProcessor : CsvProcessor
 {
-    public FiguresCsvProcessor(string outputPath) : base(outputPath) { }
+    public FiguresCsvProcessor(string outPath) : base(outPath) { }
 
     public override string ProcessFirstLine() => "name,series,character,scale,brand,origin_url\n";
 

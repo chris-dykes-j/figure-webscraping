@@ -6,7 +6,8 @@ string WritePath(string tableName) => $"/home/chris/RiderProjects/FigureWebScrap
 
 var csvProcessors = new List<CsvProcessor> // More to be added.
 {
-    new FiguresCsvProcessor(WritePath("figures"))
+    new FiguresCsvProcessor(WritePath("figures")),
+    new ReleaseCsvProcessor(WritePath("release-dates"))
 };
 
 Console.WriteLine("Starting normalization");
@@ -18,10 +19,11 @@ while (!streamReader.EndOfStream)
     foreach (var csvProcessor in csvProcessors) // may want to move internal logic to CsvProcessor classes.
     {
         var outputLine = isFirstLine ? csvProcessor.ProcessFirstLine() : csvProcessor.ProcessLine(line!);
-        File.AppendAllText(csvProcessor.OutputPath, outputLine + '\n');
-        Console.WriteLine(outputLine);
+        File.AppendAllText(csvProcessor.OutputPath, outputLine);
+        //Console.WriteLine(outputLine);
     }
     isFirstLine = false;
 }
+Console.WriteLine("Finished!");
 
 // var size = scaleRegex.Replace(columns[5], "").Replace("スケール", "");

@@ -1,8 +1,8 @@
 namespace AlterNormalization.Processors;
 
-public class ReleaseDateCsvProcessor : CsvProcessor
+public class ReleaseDatesCsvProcessor : CsvProcessor
 {
-    public ReleaseDateCsvProcessor(string outPath) : base(outPath) { }
+    public ReleaseDatesCsvProcessor(string outPath) : base(outPath) { }
 
     public override string ProcessFirstLine() => "name,year,month\n";
 

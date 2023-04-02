@@ -2,9 +2,9 @@ using System.Text.RegularExpressions;
 
 namespace AlterNormalization.Processors;
 
-public class MeasurementCsvProcessor : CsvProcessor
+public class MeasurementsCsvProcessor : CsvProcessor
 {
-    public MeasurementCsvProcessor(string outPath) : base(outPath) { }
+    public MeasurementsCsvProcessor(string outPath) : base(outPath) { }
 
     public override string ProcessFirstLine() => "name,measurement\n";
 

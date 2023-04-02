@@ -1,9 +1,8 @@
 namespace AlterNormalization.Processors;
 
-public class BlogUrlCsvProcessor : CsvProcessor
+public class BlogUrlsCsvProcessor : CsvProcessor
 {
-
-    public BlogUrlCsvProcessor(string outPath) : base(outPath) { }
+    public BlogUrlsCsvProcessor(string outPath) : base(outPath) { }
 
     public override string ProcessFirstLine() => "name,blog_url\n";
 

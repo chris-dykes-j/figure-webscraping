@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace AlterNormalization.Processors;
 
-public class SculptorCsvProcessor : CsvProcessor
+public class SculptorsCsvProcessor : CsvProcessor
 {
-    public SculptorCsvProcessor(string outPath) : base(outPath) { }
+    public SculptorsCsvProcessor(string outPath) : base(outPath) { }
 
     public override string ProcessFirstLine() => "name,sculptor\n";
 

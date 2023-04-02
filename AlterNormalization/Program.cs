@@ -3,14 +3,15 @@ using AlterNormalization.Processors;
 const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper/alter-jp.csv";
 
 var csvProcessors = new List<CsvProcessor> 
-{/*
+{
     new FiguresCsvProcessor("figures"),
-    new ReleaseDateCsvProcessor("release-dates"),
-    new PriceCsvProcessor("prices"),
-    new BlogUrlCsvProcessor("blog-urls"),
-    new MeasurementCsvProcessor("measurements"),
-    new SculptorCsvProcessor("sculptors"),*/
-    new MaterialsCsvProcessor("materials")
+    new ReleaseDatesCsvProcessor("release-dates"),
+    new PricesCsvProcessor("prices"),
+    new BlogUrlsCsvProcessor("blog-urls"),
+    new MeasurementsCsvProcessor("measurements"),
+    new SculptorsCsvProcessor("sculptors"),
+    new MaterialsCsvProcessor("materials"),
+    new PaintersCsvProcessor("painters")
 };
 
 Console.WriteLine("Starting normalization");

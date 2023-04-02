@@ -1,8 +1,8 @@
 namespace AlterNormalization.Processors;
 
-public class PriceCsvProcessor : CsvProcessor
+public class PricesCsvProcessor : CsvProcessor
 {
-    public PriceCsvProcessor(string outPath) : base(outPath) { }
+    public PricesCsvProcessor(string outPath) : base(outPath) { }
 
     public override string ProcessFirstLine() => "name,price_with_tax,price_without_tax\n";
 

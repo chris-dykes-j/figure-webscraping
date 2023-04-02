@@ -13,13 +13,7 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
         var splitArtistsFirst = SplitArtistsByBracket(Regex.Split(columns[columnIndex], @"[】）]\s"));
         var splitArtistsSecond = SplitArtistsByPlus(splitArtistsFirst);
 
-        var result = "";
-        foreach (var artist in splitArtistsSecond)
-        {
-            result += $"{columns[0]},{artist}\n";
-        }
-
-        return result;
+        return splitArtistsSecond.Aggregate("", (current, artist) => current + $"{columns[0]},{artist}\n");
     }
 
     private List<string> SplitArtistsByBracket(string[] artists)
@@ -38,18 +32,20 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
     }
 
     private List<string> SplitArtistsByPlus(List<string> artists) =>
-        artists.SelectMany(artist => artist.Split('＋', StringSplitOptions.RemoveEmptyEntries)).ToList();
+        artists.SelectMany(artist =>
+            {
+                var list = artist.Split('＋', StringSplitOptions.RemoveEmptyEntries);
+                if (list.Length <= 1) return list;
+                if (!list[0].Contains('【') && list[1].Contains('【'))
+                {
+                    list[0] += list[1][list[1].IndexOf('【')..];
+                }
+                return list;
+            })
+            .ToList();
 
-    protected bool MissingSquareBracket(string input) => input.Contains('【') && !input.Contains('】');
-    protected bool MissingParenthesis(string input) => input.Contains('（') && !input.Contains('）');
+    private bool MissingSquareBracket(string input) => input.Contains('【') && !input.Contains('】');
+    private bool MissingParenthesis(string input) => input.Contains('（') && !input.Contains('）');
 
     protected abstract int GetColumnIndex();
-    
-    /* Attempt to deal with cases where credit is given for a particular section to two sculptors.
-    var list = sculptor.Split('＋', StringSplitOptions.RemoveEmptyEntries);
-    if (MissingSquareBracket(list[0]) || MissingParenthesis(list[0]))
-    {
-        list[0] += list[1][list[1].IndexOfAny(new[] { '【', '（' })..];
-    } 
-    */
 }

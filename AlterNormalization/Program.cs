@@ -9,8 +9,8 @@ var csvProcessors = new List<CsvProcessor>
     new PricesCsvProcessor("prices"),
     new BlogUrlsCsvProcessor("blog-urls"),
     new MeasurementsCsvProcessor("measurements"),
-    new SculptorsCsvProcessor("sculptors"),
     new MaterialsCsvProcessor("materials"),
+    new SculptorsCsvProcessor("sculptors"),
     new PaintersCsvProcessor("painters")
 };
 

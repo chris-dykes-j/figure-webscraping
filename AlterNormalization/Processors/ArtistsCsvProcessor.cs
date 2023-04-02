@@ -16,7 +16,7 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
         return splitArtistsSecond.Aggregate("", (current, artist) => current + $"{columns[0]},{artist}\n");
     }
 
-    private List<string> SplitArtistsByBracket(string[] artists)
+    private IEnumerable<string> SplitArtistsByBracket(IEnumerable<string> artists)
     {
         var result = new List<string>();
         foreach (var artist in artists)
@@ -24,6 +24,7 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
             var artistResult = artist;
             if (string.IsNullOrWhiteSpace(artist)) continue;
             if (artist.Contains("原型協力：アルター")) continue;
+            if (string.Equals(artist, "—") || string.Equals(artist, "―")) continue;
             if (MissingSquareBracket(artist)) artistResult += '】';
             if (MissingParenthesis(artist)) artistResult += '）';
             result.Add(artistResult);
@@ -31,7 +32,7 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
         return result;
     }
 
-    private List<string> SplitArtistsByPlus(List<string> artists) =>
+    private IEnumerable<string> SplitArtistsByPlus(IEnumerable<string> artists) =>
         artists.SelectMany(artist =>
             {
                 var list = artist.Split('＋', StringSplitOptions.RemoveEmptyEntries);

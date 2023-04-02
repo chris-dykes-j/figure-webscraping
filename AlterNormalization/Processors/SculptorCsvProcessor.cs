@@ -11,7 +11,6 @@ public class SculptorCsvProcessor : CsvProcessor
 
     public override string ProcessLine(string line)
     {
-        // Remove 原型協力：アルター
         var columns = SplitIgnoringQuotes(line, ',');
         var splitSculptorsFirst = SplitSculptorsByBracket(Regex.Split(columns[6], @"[】）]\s"));
         var splitSculptorsSecond = SplitSculptorsByPlus( splitSculptorsFirst);
@@ -31,8 +30,8 @@ public class SculptorCsvProcessor : CsvProcessor
         foreach (var sculptor in sculptors)
         {
             var sculptorResult = sculptor;
-            if (sculptor.Contains("原型協力：アルター")) continue;
             if (string.IsNullOrWhiteSpace(sculptor)) continue;
+            if (sculptor.Contains("原型協力：アルター")) continue;
             if (sculptor.Contains('【') && !sculptor.Contains('】')) sculptorResult += '】';
             if (sculptor.Contains('（') && !sculptor.Contains('）')) sculptorResult += '）';
             result.Add(sculptorResult);
@@ -41,18 +40,6 @@ public class SculptorCsvProcessor : CsvProcessor
         return result;
     }
 
-    private List<string> SplitSculptorsByPlus(List<string> sculptors)
-    {
-        var result = new List<string>();
-        foreach (var sculptor in sculptors)
-        {
-            var multiple = sculptor.Split('＋', StringSplitOptions.RemoveEmptyEntries);
-            foreach (var s in multiple)
-            {
-                result.Add(s);
-            }
-        }
-
-        return result;
-    }
+    private List<string> SplitSculptorsByPlus(List<string> sculptors) => 
+        sculptors.SelectMany(sculptor => sculptor.Split('＋', StringSplitOptions.RemoveEmptyEntries)).ToList();
 }

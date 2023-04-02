@@ -3,12 +3,12 @@ using AlterNormalization.Processors;
 const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper/alter-jp.csv";
 
 var csvProcessors = new List<CsvProcessor> 
-{ 
+{
     new FiguresCsvProcessor("figures"),
     new ReleaseDateCsvProcessor("release-dates"),
     new PriceCsvProcessor("prices"),
     new BlogUrlCsvProcessor("blog-urls"),
-    new MeasurementCsvProcessor("measurements"),
+    new MeasurementCsvProcessor("measurements"), 
     new SculptorCsvProcessor("sculptors")
 };
 

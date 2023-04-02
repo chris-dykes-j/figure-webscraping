@@ -32,8 +32,8 @@ public class SculptorCsvProcessor : CsvProcessor
             var sculptorResult = sculptor;
             if (string.IsNullOrWhiteSpace(sculptor)) continue;
             if (sculptor.Contains("原型協力：アルター")) continue;
-            if (sculptor.Contains('【') && !sculptor.Contains('】')) sculptorResult += '】';
-            if (sculptor.Contains('（') && !sculptor.Contains('）')) sculptorResult += '）';
+            if (MissingSquareBracket(sculptor)) sculptorResult += '】';
+            if (MissingParenthesis(sculptor)) sculptorResult += '）';
             result.Add(sculptorResult);
         }
 
@@ -42,4 +42,16 @@ public class SculptorCsvProcessor : CsvProcessor
 
     private List<string> SplitSculptorsByPlus(List<string> sculptors) => 
         sculptors.SelectMany(sculptor => sculptor.Split('＋', StringSplitOptions.RemoveEmptyEntries)).ToList();
+
+    private bool MissingSquareBracket(string input) => input.Contains('【') && !input.Contains('】');
+    
+    private bool MissingParenthesis(string input) => input.Contains('（') && !input.Contains('）');
+            
+    /* Attempt to deal with cases where credit is given for a particular section to two sculptors.
+    var list = sculptor.Split('＋', StringSplitOptions.RemoveEmptyEntries);
+    if (MissingSquareBracket(list[0]) || MissingParenthesis(list[0]))
+    {
+        list[0] += list[1][list[1].IndexOfAny(new[] { '【', '（' })..];
+    } 
+    */
 }

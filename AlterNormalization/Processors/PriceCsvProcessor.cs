@@ -40,13 +40,10 @@ public class PriceCsvProcessor : CsvProcessor
     private string SplitWithTwoPrices(string price, string name)
     {
         var result = "";
-        var lines = price.Split(' ');
+        var lines = price.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         foreach (var line in lines)
         {
-            if (!string.IsNullOrWhiteSpace(line))
-            {
-                result += $"{name},{line},\n";
-            }
+            result += $"{name},{line},\n";
         }
         return result;
     }

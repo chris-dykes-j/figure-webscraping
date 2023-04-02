@@ -9,15 +9,13 @@ public class ReleaseDateCsvProcessor : CsvProcessor
     public override string ProcessLine(string line)
     {
         var columns = SplitIgnoringQuotes(line, ',');
-        var dates = columns[3].TrimEnd().Split(' ');
+        var dates = columns[3].TrimEnd().Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var result = "";
         foreach (var date in dates)
         {
-            if (!string.IsNullOrWhiteSpace(date))
-            {
                 result += $"{columns[0]},{date[0..4]},{date[5..7].Trim('月')}\n";
-            }
         }
+        
         return result;
     }
 }

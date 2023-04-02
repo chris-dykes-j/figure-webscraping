@@ -15,26 +15,15 @@ public class MeasurementCsvProcessor : CsvProcessor
         var result = "";
         foreach (var measurement in measurements)
         {
-            result += $"{columns[0]},{measurement}\n";
+            result += $"{columns[0]},{measurement.Trim()}\n";
         }
-
+        
         return result;
     }
     
-    private List<string> SplitFigureMeasurements(string measurement)
+    private string[] SplitFigureMeasurements(string measurement)
     {
-        measurement = Regex.Replace(measurement, @"1/[1-9] スケール ", "");
-        
-        /* AI funny business. Let me handle this.
-        var sizePattern = @"[^,]+：[^,\s]+";
-        var matches = Regex.Matches(measurement, sizePattern);
-        var sizes = new List<string>();
-
-        foreach (Match match in matches)
-        {
-            sizes.Add(match.Value.Trim());
-        }
-        */
-        return new() { measurement }; // For now
+        measurement = Regex.Replace(measurement, @"1/\d+ スケール ", "");
+        return measurement.Split(' ', StringSplitOptions.RemoveEmptyEntries);
     }
 }

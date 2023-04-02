@@ -7,7 +7,7 @@ public abstract class CsvProcessor
     protected CsvProcessor(string outPath)
     {
         OutputPath = WritePath(outPath);
-        CreateOutputFile(); // Breaks single responsibility but w/e.
+        CreateOutputFile(); 
     }
 
     private string WritePath(string tableName) => 

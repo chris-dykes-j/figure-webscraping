@@ -11,7 +11,6 @@ public class PriceCsvProcessor : CsvProcessor
         var result = "";
         var columns = SplitIgnoringQuotes(line, ',');
         var price = columns[4].Replace("送料手数料別", "").Replace(",", "");
-        // 送料手数料別
         const string noTax = "+税";
         const string hasTax = "（税込）";
         const string hasBothPrices = "税抜";

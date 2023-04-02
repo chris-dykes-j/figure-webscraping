@@ -5,8 +5,9 @@ const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper
 var csvProcessors = new List<CsvProcessor> // More to be added.
 {
     new FiguresCsvProcessor("figures"),
-    new ReleaseCsvProcessor("release-dates"),
-    new PriceCsvProcessor("prices")
+    new ReleaseDateCsvProcessor("release-dates"),
+    new PriceCsvProcessor("prices"),
+    new BlogUrlCsvProcessor("blog-urls")
 };
 
 Console.WriteLine("Starting normalization");

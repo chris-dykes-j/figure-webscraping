@@ -10,12 +10,7 @@ public class ReleaseDatesCsvProcessor : CsvProcessor
     {
         var columns = SplitIgnoringQuotes(line, ',');
         var dates = columns[3].TrimEnd().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        var result = "";
-        foreach (var date in dates)
-        {
-                result += $"{columns[0]},{date[0..4]},{date[5..7].Trim('月')}\n";
-        }
-        
-        return result;
+
+        return dates.Aggregate("", (current, date) => current + $"{columns[0]},{date[0..4]},{date[5..7].Trim('月')}\n");
     }
 }

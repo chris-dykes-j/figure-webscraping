@@ -8,7 +8,6 @@ public class PricesCsvProcessor : CsvProcessor
 
     public override string ProcessLine(string line)
     {
-        var result = "";
         var columns = SplitIgnoringQuotes(line, ',');
         var price = columns[4].Replace("送料手数料別", "").Replace(",", "");
         const string noTax = "+税";
@@ -16,41 +15,28 @@ public class PricesCsvProcessor : CsvProcessor
         const string hasBothPrices = "税抜";
         const string hasTwoPrices = "【通常版】";
 
-        if (price.Contains(hasTwoPrices))
+        var result = price switch
         {
-            return SplitWithTwoPrices(price.Replace(hasTax, " "), columns[0]);
-        }
+            _ when price.Contains(hasTwoPrices) => SplitWithTwoPrices(price.Replace(hasTax, " "), columns[0]),
+            _ when price.Contains(noTax) => SplitWithoutTax(price.Replace(noTax, ""), columns[0]),
+            _ when price.Contains(hasTax) => SplitWithTax(price.Replace(hasTax, ""), columns[0]),
+            _ when price.Contains(hasBothPrices) => SplitWithBothPrices(price, columns[0]),
+            _ => ""
+        };
 
-        if (price.Contains(noTax))
-        {
-            result += SplitWithoutTax(price.Replace(noTax, ""));
-        }
-        else if (price.Contains(hasTax))
-        {
-            result += SplitWithTax(price.Replace(hasTax, ""));
-        }
-        else if (price.Contains(hasBothPrices))
-        {
-            result += SplitWithBothPrices(price);
-        }
-
-        return $"{columns[0]},{result}\n";
+        return result;
     }
 
     private string SplitWithTwoPrices(string price, string name)
     {
-        var result = "";
         var lines = price.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        foreach (var line in lines)
-        {
-            result += $"{name},{line},\n";
-        }
-        return result;
+        return lines.Aggregate("", (current, line) => current + $"{name},{line},\n");
     }
 
-    private string SplitWithoutTax(string price) => $",{price}";
+    private string SplitWithoutTax(string price, string name) => $"{name},,{price}\n";
 
-    private string SplitWithTax(string price) => $"{price},";
+    private string SplitWithTax(string price, string name) => $"{name},{price},\n";
 
-    private string SplitWithBothPrices(string price) => price.Replace("（税抜", ",").TrimEnd('）');
+    private string SplitWithBothPrices(string price, string name) => 
+        $"{name},{price.Replace("（税抜", ",").TrimEnd('）')}\n";
 }

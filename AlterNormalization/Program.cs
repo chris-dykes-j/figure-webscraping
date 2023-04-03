@@ -5,6 +5,7 @@ const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper
 var csvProcessors = new List<CsvProcessor> 
 {
     new FiguresCsvProcessor("figures"),
+    new CharactersCsvProcessor("characters"),
     new ReleaseDatesCsvProcessor("release-dates"),
     new PricesCsvProcessor("prices"),
     new BlogUrlsCsvProcessor("blog-urls"),

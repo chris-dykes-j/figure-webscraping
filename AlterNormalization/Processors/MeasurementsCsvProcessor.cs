@@ -15,7 +15,12 @@ public class MeasurementsCsvProcessor : CsvProcessor
         var result = "";
         foreach (var measurement in measurements)
         {
-            result += $"{columns[0]},{measurement.Trim()}\n";
+            result += measurement switch
+            {
+                _ when MissingCloseSquareBracket(measurement) => $"{columns[0]},{measurement}",
+                _ when MissingOpenSquareBracket(measurement) => $"{measurement.Trim()}\n",
+                _ => $"{columns[0]},{measurement.Trim()}\n"
+            };
         }
         
         return result;
@@ -23,7 +28,12 @@ public class MeasurementsCsvProcessor : CsvProcessor
     
     private string[] SplitFigureMeasurements(string measurement)
     {
-        measurement = Regex.Replace(measurement, @"1/\d+ スケール ", "");
+        measurement = Regex.Replace(measurement, @"1/\d+ スケール ", "")
+            .Replace("NON", "")
+            .Replace("スケール", "");
         return measurement.Split(' ', StringSplitOptions.RemoveEmptyEntries);
     }
+    
+    private bool MissingCloseSquareBracket(string input) => input.Contains('【') && !input.Contains('】');
+    private bool MissingOpenSquareBracket(string input) => input.Contains('】') && !input.Contains('【');
 }

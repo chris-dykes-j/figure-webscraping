@@ -9,8 +9,7 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
     public override string ProcessLine(string line)
     {
         var columns = SplitIgnoringQuotes(line, ',');
-        var columnIndex = GetColumnIndex();
-        var splitArtistsFirst = SplitArtistsByBracket(Regex.Split(columns[columnIndex], @"[】）]\s"));
+        var splitArtistsFirst = SplitArtistsByBracket(Regex.Split(columns[GetColumnIndex()], @"[】）]\s"));
         var splitArtistsSecond = SplitArtistsByPlus(splitArtistsFirst);
 
         return splitArtistsSecond.Aggregate("", (current, artist) => current + $"{columns[0]},{artist}\n");

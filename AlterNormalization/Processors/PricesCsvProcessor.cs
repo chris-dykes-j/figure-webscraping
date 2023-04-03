@@ -15,7 +15,7 @@ public class PricesCsvProcessor : CsvProcessor
         const string hasBothPrices = "税抜";
         const string hasTwoPrices = "【通常版】";
 
-        var result = price switch
+        return price switch
         {
             _ when price.Contains(hasTwoPrices) => SplitWithTwoPrices(price.Replace(hasTax, " "), columns[0]),
             _ when price.Contains(noTax) => SplitWithoutTax(price.Replace(noTax, ""), columns[0]),
@@ -23,8 +23,6 @@ public class PricesCsvProcessor : CsvProcessor
             _ when price.Contains(hasBothPrices) => SplitWithBothPrices(price, columns[0]),
             _ => ""
         };
-
-        return result;
     }
 
     private string SplitWithTwoPrices(string price, string name)

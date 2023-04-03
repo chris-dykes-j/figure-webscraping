@@ -10,12 +10,7 @@ public class BlogUrlsCsvProcessor : CsvProcessor
     {
         var columns = SplitIgnoringQuotes(line, ',');
         var blogUrls = SplitBlogUrls(columns[11]);
-        var result = "";
-        foreach (var blogUrl in blogUrls)
-        {
-            result += $"{columns[0]},https://alter-web.jp{blogUrl}\n";
-        }
-        return result;
+        return blogUrls.Aggregate("", (current, blogUrl) => current + $"{columns[0]},https://alter-web.jp{blogUrl}\n");
     }
     
     private string[] SplitBlogUrls(string blogUrls) => blogUrls.Split(',', StringSplitOptions.RemoveEmptyEntries);

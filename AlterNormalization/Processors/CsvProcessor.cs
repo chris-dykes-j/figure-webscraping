@@ -27,12 +27,9 @@ public abstract class CsvProcessor
         for (var i = 0; i < line.Length; i++)
         {
             if (line[i] == '"') inQuotes = !inQuotes;
-
-            if (line[i] == delimiter && !inQuotes)
-            {
-                result.Add(line.Substring(start, i - start).Trim('\"', ' '));
-                start = i + 1;
-            }
+            if (line[i] != delimiter || inQuotes) continue;
+            result.Add(line.Substring(start, i - start).Trim('\"', ' '));
+            start = i + 1;
         }
         result.Add(line[start..].Trim('\"', ' '));
 

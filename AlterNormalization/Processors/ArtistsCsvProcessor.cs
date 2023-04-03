@@ -41,11 +41,11 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
                 if (list.Length <= 1) return list;
                 if (!list[0].Contains('【') && list[1].Contains('【'))
                 {
-                    list[0] += list[1][list[1].IndexOf('【')..];
+                    var index = list[1].IndexOf('【');
+                    list[0] += list[1][index..];
                 }
                 return list;
-            })
-            .ToList();
+            }).ToList();
 
     private bool MissingSquareBracket(string input) => input.Contains('【') && !input.Contains('】');
     private bool MissingParenthesis(string input) => input.Contains('（') && !input.Contains('）');

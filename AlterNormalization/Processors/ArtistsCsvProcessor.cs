@@ -21,12 +21,14 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
         var result = new List<string>();
         foreach (var artist in artists)
         {
-            var artistResult = artist;
             if (string.IsNullOrWhiteSpace(artist)) continue;
-            if (artist.Contains("原型協力：アルター")) continue;
             if (string.Equals(artist, "—") || string.Equals(artist, "―")) continue;
-            if (MissingSquareBracket(artist)) artistResult += '】';
-            if (MissingParenthesis(artist)) artistResult += '）';
+            
+            var artistResult = artist;
+            if (MissingSquareBracket(artistResult)) artistResult += '】';
+            if (MissingParenthesis(artistResult)) artistResult += '）';
+            if (artist.Contains("原型協力：アルター")) artistResult = artistResult.Replace("原型協力：アルター", "");
+            if (artist.Contains("彩色協力：アルター")) artistResult = artistResult.Replace("彩色協力：アルター", "");
             result.Add(artistResult);
         }
         return result;

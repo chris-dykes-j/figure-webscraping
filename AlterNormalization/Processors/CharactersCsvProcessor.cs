@@ -12,7 +12,7 @@ public class CharactersCsvProcessor : CsvProcessor
         var columns = SplitIgnoringQuotes(line, ',');
         var charactersColumn = GetCharacters(columns);
         
-        return charactersColumn.Aggregate("", (current, character) => //IsTwoCharacters(character) 
+        return charactersColumn.Aggregate("", (current, character) => 
             $"{current}{columns[0]},{character.TrimStart()}\n");
     }
 
@@ -26,6 +26,9 @@ public class CharactersCsvProcessor : CsvProcessor
     }
 
     private bool IsRyzaCharacter(string character) => character.Contains("Atelier Ryza: Ever Darkness & the Secret Hideout");
+    
+    private IEnumerable<string> GetRyzaCharacter(string characters) => new[] { characters };
+    
     private bool IsEdgeCaseCharacter(string nameColumn, string characterColumn)
     {
         var character = string.IsNullOrWhiteSpace(characterColumn) ? nameColumn : characterColumn;
@@ -34,9 +37,7 @@ public class CharactersCsvProcessor : CsvProcessor
                character.Contains("シャマル & ザフィーラ 仔犬Ver.") ||
                character.Contains("ユーリ・ローウェル　心の中の聖騎士様Ver.＆ラピード");
     }
-
-    private IEnumerable<string> GetRyzaCharacter(string characters) => new[] { characters };
-
+    
     private IEnumerable<string> GetEdgeCaseCharacters(string nameColumn, string characterColumn)
     {
         var characters = string.IsNullOrWhiteSpace(characterColumn) ? nameColumn : characterColumn;

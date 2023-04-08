@@ -6,7 +6,6 @@ public class CharactersCsvProcessor : CsvProcessor
 
     public override string ProcessFirstLine() => "name,character\n";
 
-    private int i = 0;
     public override string ProcessLine(string line)
     {
         var columns = SplitIgnoringQuotes(line, ',');

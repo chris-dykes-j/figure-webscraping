@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScraperTools", "ScraperTool
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterNormalization", "AlterNormalization\AlterNormalization.csproj", "{A4BB2BC0-341A-4590-9CF0-A84CC448000A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterSql", "AlterSql\AlterSql.csproj", "{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{A4BB2BC0-341A-4590-9CF0-A84CC448000A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4BB2BC0-341A-4590-9CF0-A84CC448000A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4BB2BC0-341A-4590-9CF0-A84CC448000A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

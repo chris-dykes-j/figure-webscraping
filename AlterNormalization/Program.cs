@@ -1,6 +1,6 @@
 using AlterNormalization.Processors;
 
-const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterScraper/alter-jp.csv";
+const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterCleanup/alter-jp.csv";
 
 var csvProcessors = new List<CsvProcessor> 
 {

@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterNormalization", "Alter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterSql", "AlterSql\AlterSql.csproj", "{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlterCleanup", "AlterCleanup\AlterCleanup.csproj", "{B92EAC7C-F9A1-40C3-BC1E-5673219EEB0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C04CF99-FFE6-4AFE-B15F-7ECACAE54750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B92EAC7C-F9A1-40C3-BC1E-5673219EEB0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B92EAC7C-F9A1-40C3-BC1E-5673219EEB0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B92EAC7C-F9A1-40C3-BC1E-5673219EEB0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B92EAC7C-F9A1-40C3-BC1E-5673219EEB0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

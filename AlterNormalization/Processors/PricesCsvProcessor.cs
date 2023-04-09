@@ -4,7 +4,7 @@ public class PricesCsvProcessor : CsvProcessor
 {
     public PricesCsvProcessor(string outPath) : base(outPath) { }
 
-    public override string ProcessFirstLine() => "name,price_with_tax,price_without_tax\n";
+    public override string ProcessFirstLine() => "figure_id,price_with_tax,price_without_tax\n";
 
     public override string ProcessLine(string line)
     {
@@ -17,10 +17,10 @@ public class PricesCsvProcessor : CsvProcessor
 
         return price switch
         {
-            _ when price.Contains(hasTwoPrices) => SplitWithTwoPrices(price.Replace(hasTax, " "), columns[0]),
-            _ when price.Contains(noTax) => SplitWithoutTax(price.Replace(noTax, ""), columns[0]),
-            _ when price.Contains(hasTax) => SplitWithTax(price.Replace(hasTax, ""), columns[0]),
-            _ when price.Contains(hasBothPrices) => SplitWithBothPrices(price, columns[0]),
+            _ when price.Contains(hasTwoPrices) => SplitWithTwoPrices(price.Replace(hasTax, " "), columns[12]),
+            _ when price.Contains(noTax) => SplitWithoutTax(price.Replace(noTax, ""), columns[12]),
+            _ when price.Contains(hasTax) => SplitWithTax(price.Replace(hasTax, ""), columns[12]),
+            _ when price.Contains(hasBothPrices) => SplitWithBothPrices(price, columns[12]),
             _ => ""
         };
     }

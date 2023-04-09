@@ -4,7 +4,7 @@ public class MaterialsCsvProcessor : CsvProcessor
 {
     public MaterialsCsvProcessor(string outPath) : base(outPath) { }
 
-    public override string ProcessFirstLine() => "name,material\n";
+    public override string ProcessFirstLine() => "figure_id,material\n";
 
     public override string ProcessLine(string line)
     {
@@ -13,7 +13,7 @@ public class MaterialsCsvProcessor : CsvProcessor
         var result = "";
         foreach (var material in materials)
         {
-            result += $"{columns[0]},{material}\n";
+            result += $"{columns[12]},{material}\n";
         }
 
         return result;

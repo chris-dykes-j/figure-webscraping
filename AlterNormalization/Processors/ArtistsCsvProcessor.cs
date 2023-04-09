@@ -12,7 +12,7 @@ public abstract class ArtistsCsvProcessor : CsvProcessor
         var splitArtistsFirst = SplitArtistsByBracket(Regex.Split(columns[GetColumnIndex()], @"[】）]\s"));
         var splitArtistsSecond = SplitArtistsByPlus(splitArtistsFirst);
 
-        return splitArtistsSecond.Aggregate("", (current, artist) => current + $"{columns[0]},{artist}\n");
+        return splitArtistsSecond.Aggregate("", (current, artist) => current + $"{columns[12]},{artist}\n");
     }
 
     private IEnumerable<string> SplitArtistsByBracket(IEnumerable<string> artists)

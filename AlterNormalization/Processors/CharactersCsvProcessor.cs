@@ -4,7 +4,7 @@ public class CharactersCsvProcessor : CsvProcessor
 {
     public CharactersCsvProcessor(string outPath) : base(outPath) { }
 
-    public override string ProcessFirstLine() => "name,character\n";
+    public override string ProcessFirstLine() => "figure_id,character\n";
 
     public override string ProcessLine(string line)
     {
@@ -12,7 +12,7 @@ public class CharactersCsvProcessor : CsvProcessor
         var charactersColumn = GetCharacters(columns);
         
         return charactersColumn.Aggregate("", (current, character) => 
-            $"{current}{columns[0]},{character.TrimStart()}\n");
+            $"{current}{columns[12]},{character.TrimStart()}\n");
     }
 
     private IEnumerable<string> GetCharacters(List<string> columns)

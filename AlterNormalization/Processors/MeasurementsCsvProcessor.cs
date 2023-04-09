@@ -6,7 +6,7 @@ public class MeasurementsCsvProcessor : CsvProcessor
 {
     public MeasurementsCsvProcessor(string outPath) : base(outPath) { }
 
-    public override string ProcessFirstLine() => "name,measurement\n";
+    public override string ProcessFirstLine() => "figure_id,measurement\n";
 
     public override string ProcessLine(string line)
     {
@@ -17,9 +17,9 @@ public class MeasurementsCsvProcessor : CsvProcessor
         {
             result += measurement switch
             {
-                _ when MissingCloseSquareBracket(measurement) => $"{columns[0]},{measurement}",
+                _ when MissingCloseSquareBracket(measurement) => $"{columns[12]},{measurement}",
                 _ when MissingOpenSquareBracket(measurement) => $"{measurement.Trim()}\n",
-                _ => $"{columns[0]},{measurement.Trim()}\n"
+                _ => $"{columns[12]},{measurement.Trim()}\n"
             };
         }
         

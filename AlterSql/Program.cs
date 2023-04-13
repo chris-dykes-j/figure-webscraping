@@ -1,5 +1,4 @@
-﻿
-const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/Output/alter-figures-jp.csv";
+﻿const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/Output/alter-figures-jp.csv";
 const string outputPath = "/home/chris/RiderProjects/FigureWebScraper/AlterSql/Sql/insert.sql";
 
 File.Create(outputPath).Dispose();
@@ -15,19 +14,13 @@ while (!streamReader.EndOfStream)
 string ProcessLine(string line)
 {
     var columns = SplitIgnoringQuotes(line, ',');
-    return $"WITH inserted_figure AS (\n" +
-           $"  INSERT INTO figure (scale, brand, origin_url) VALUES ('{columns[2]}', '{columns[3]}', '{columns[4]}')\n" +
-           $"  RETURNING id\n" +
-           $"),\n" +
-           $"inserted_figure_name AS (\n" +
-           $"  INSERT INTO figure_name (figure_id, language_code, text)\n" +
-           $"  SELECT id, 'ja', '{columns[0]}' FROM inserted_figure\n" +
-           $"  RETURNING figure_id\n" +
-           $")\n" +
-           $"INSERT INTO series_name (figure_id, language_code, text)\n" +
-           $"SELECT figure_id, 'ja', '{columns[1]}' FROM inserted_figure_name;\n";
-
-
+    return 
+        "INSERT INTO figure (id, scale, brand, origin_url) " +
+        $"VALUES ('{columns[0]}', '{columns[3]}', '{columns[4]}', '{columns[5]}');\n" +
+        "INSERT INTO figure_name (figure_id, language_code, text) " +
+        $"VALUES ('{columns[0]}', 'ja', '{columns[1]}');\n" +
+        "INSERT INTO series_name (figure_id, language_code, text) " +
+        $"VALUES ('{columns[0]}', 'ja', '{columns[2]}');\n";
 }
 
 List<string> SplitIgnoringQuotes(string line, char delimiter)

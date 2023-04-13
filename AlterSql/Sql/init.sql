@@ -18,22 +18,22 @@ CREATE TABLE figure
 
 CREATE TABLE figure_name
 (
-  id SERIAL PRIMARY KEY,
   figure_id INT NOT NULL,
   language_code CHAR(2) NOT NULL,
   text VARCHAR(255) NOT NULL,
+  PRIMARY KEY (figure_id, language_code),
   FOREIGN KEY (figure_id) REFERENCES figure (id),
-  FOREIGN KEY (language_code) REFERENCES languages (language_code)
-  --UNIQUE (figure_id, language_code)
+  FOREIGN KEY (language_code) REFERENCES languages (language_code),
+  UNIQUE (figure_id, language_code)
 );
 
 CREATE TABLE series_name
 (
-  id SERIAL PRIMARY KEY,
   figure_id INT NOT NULL,
   language_code CHAR(2) NOT NULL,
   text VARCHAR(255) NOT NULL,
+  PRIMARY KEY (figure_id, language_code),
   FOREIGN KEY (figure_id) REFERENCES figure (id),
-  FOREIGN KEY (language_code) REFERENCES languages (language_code)
-  --UNIQUE (figure_id, language_code)
+  FOREIGN KEY (language_code) REFERENCES languages (language_code),
+  UNIQUE (figure_id, language_code)
 );

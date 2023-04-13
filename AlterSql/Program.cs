@@ -1,27 +1,106 @@
-﻿const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/Output/alter-figures-jp.csv";
-const string outputPath = "/home/chris/RiderProjects/FigureWebScraper/AlterSql/Sql/insert.sql";
+﻿using System.Data;
+using Npgsql;
 
-File.Create(outputPath).Dispose();
+const string readPath = "/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/Output/alter-figures-jp.csv";
+const string connectionString = "Host=localhost;Username=chris;Password=;Database=figures";
+const string initScriptPath = "/home/chris/RiderProjects/FigureWebScraper/AlterSql/init.sql";
+
 using var streamReader = new StreamReader(readPath);
-
 streamReader.ReadLine(); // Skip first line.
+
+using var connection = new NpgsqlConnection(connectionString);
+try
+{
+    connection.Open();
+    ExecuteSqlScript(connection, initScriptPath);
+}
+catch (Exception e)
+{
+    Console.WriteLine($"Error: {e}");
+}
+
 while (!streamReader.EndOfStream)
 {
-    var outputLine = ProcessLine(streamReader.ReadLine()!);
-    File.AppendAllText(outputPath, outputLine);
+    var line = streamReader.ReadLine();
+    if (line == null) break;
+
+    var columns = SplitIgnoringQuotes(line, ',');
+    using var transaction = connection.BeginTransaction(IsolationLevel.ReadCommitted);
+    try
+    {
+        InsertFigure(connection, columns);
+        InsertFigureName(connection, columns);
+        InsertSeriesName(connection, columns);
+        transaction.Commit();
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine($"Error processing line: {line}\n{e}");
+        transaction.Rollback();
+    }
 }
 
-string ProcessLine(string line)
+connection.Close();
+
+void ExecuteSqlScript(NpgsqlConnection dbConnection, string scriptPath)
 {
-    var columns = SplitIgnoringQuotes(line, ',');
-    return 
-        "INSERT INTO figure (id, scale, brand, origin_url) " +
-        $"VALUES ('{columns[0]}', '{columns[3]}', '{columns[4]}', '{columns[5]}');\n" +
-        "INSERT INTO figure_name (figure_id, language_code, text) " +
-        $"VALUES ('{columns[0]}', 'ja', '{columns[1]}');\n" +
-        "INSERT INTO series_name (figure_id, language_code, text) " +
-        $"VALUES ('{columns[0]}', 'ja', '{columns[2]}');\n";
+    var scriptContent = File.ReadAllText(scriptPath);
+    var commands = scriptContent.Split(';', StringSplitOptions.RemoveEmptyEntries);
+
+    foreach (var command in commands)
+    {
+        using var sqlCommand = new NpgsqlCommand(command, dbConnection);
+        sqlCommand.ExecuteNonQuery();
+    }
 }
+
+void InsertData(NpgsqlConnection dbConnection, string tableName, Dictionary<string, object> columnData)
+{
+    var columnNames = string.Join(", ", columnData.Keys);
+    var parameterNames = string.Join(", ", columnData.Keys.Select(k => "@" + k));
+    var insertQuery = $"INSERT INTO {tableName} ({columnNames}) VALUES ({parameterNames});";
+    using var command = new NpgsqlCommand(insertQuery, dbConnection);
+    foreach (var column in columnData)
+    {
+        command.Parameters.AddWithValue(column.Key, column.Value);
+    }
+    command.ExecuteNonQuery();
+}
+
+void InsertFigure(NpgsqlConnection dbConnection, List<string> columns)
+{
+    var columnData = new Dictionary<string, object>
+    {
+        { "id", int.Parse(columns[0]) },
+        { "scale", columns[3] },
+        { "brand", columns[4] },
+        { "origin_url", columns[5] }
+    };
+    InsertData(dbConnection, "figure", columnData);
+}
+
+void InsertFigureName(NpgsqlConnection dbConnection, List<string> columns)
+{
+    var columnData = new Dictionary<string, object>
+    {
+        { "figure_id", int.Parse(columns[0]) },
+        { "language_code", "ja" },
+        { "text", columns[1] }
+    };
+    InsertData(dbConnection, "figure_name", columnData);
+}
+
+void InsertSeriesName(NpgsqlConnection dbConnection, List<string> columns)
+{
+    var columnData = new Dictionary<string, object>
+    {
+        { "figure_id", int.Parse(columns[0]) },
+        { "language_code", "ja" },
+        { "text", columns[2] }
+    };
+    InsertData(dbConnection, "series_name", columnData);
+}
+
 
 List<string> SplitIgnoringQuotes(string line, char delimiter)
 {
@@ -39,7 +118,6 @@ List<string> SplitIgnoringQuotes(string line, char delimiter)
             .Trim('\"', ' '));
         start = i + 1;
     }
-
     result.Add(line[start..].Trim('\"', ' '));
 
     return result;

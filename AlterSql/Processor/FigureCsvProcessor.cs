@@ -6,16 +6,16 @@ public class FigureCsvProcessor : CsvProcessor
 {
     public FigureCsvProcessor(string tableName, NpgsqlConnection connection) : base(tableName, connection) { }
 
-    protected override void ExecuteSql(string[] columns)
+    protected override void ExecuteSql(string?[] columns)
     {
         InsertFigure(Connection, columns);
         InsertFigureName(Connection, columns);
         InsertSeriesName(Connection, columns);
     }
 
-    void InsertFigure(NpgsqlConnection dbConnection, string[] columns)
+    void InsertFigure(NpgsqlConnection dbConnection, string?[] columns)
     {
-        var columnData = new Dictionary<string, object>
+        var columnData = new Dictionary<string, object?>
         {
             { "id", int.Parse(columns[0]) },
             { "scale", columns[3] },
@@ -25,9 +25,9 @@ public class FigureCsvProcessor : CsvProcessor
         InsertData(dbConnection, "figure", columnData);
     }
 
-    void InsertFigureName(NpgsqlConnection dbConnection, string[] columns)
+    void InsertFigureName(NpgsqlConnection dbConnection, string?[] columns)
     {
-        var columnData = new Dictionary<string, object>
+        var columnData = new Dictionary<string, object?>
         {
             { "figure_id", int.Parse(columns[0]) },
             { "language_code", "ja" },
@@ -36,9 +36,9 @@ public class FigureCsvProcessor : CsvProcessor
         InsertData(dbConnection, "figure_name", columnData);
     }
 
-    void InsertSeriesName(NpgsqlConnection dbConnection, string[] columns)
+    void InsertSeriesName(NpgsqlConnection dbConnection, string?[] columns)
     {
-        var columnData = new Dictionary<string, object>
+        var columnData = new Dictionary<string, object?>
         {
             { "figure_id", int.Parse(columns[0]) },
             { "language_code", "ja" },

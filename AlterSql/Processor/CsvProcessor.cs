@@ -1,5 +1,6 @@
 using System.Data;
 using Npgsql;
+using NpgsqlTypes;
 
 namespace AlterSql.Processor;
 
@@ -23,7 +24,7 @@ public abstract class CsvProcessor
             var line = streamReader.ReadLine();
             if (line == null) break;
 
-            var columns = line.Split(',');
+            string?[] columns = line.Split(',');
             using var transaction = Connection.BeginTransaction(IsolationLevel.ReadCommitted);
             try
             {
@@ -37,8 +38,8 @@ public abstract class CsvProcessor
             }
         }
     }
-    
-    protected void InsertData(NpgsqlConnection dbConnection, string tableName, Dictionary<string, object> columnData)
+
+    protected void InsertData(NpgsqlConnection dbConnection, string tableName, Dictionary<string, object?> columnData)
     {
         var columnNames = string.Join(", ", columnData.Keys);
         var parameterNames = string.Join(", ", columnData.Keys.Select(k => "@" + k));
@@ -46,10 +47,24 @@ public abstract class CsvProcessor
         using var command = new NpgsqlCommand(insertQuery, dbConnection);
         foreach (var column in columnData)
         {
-            command.Parameters.AddWithValue(column.Key, column.Value);
+            command.Parameters.AddWithValue(column.Key, column.Value ?? DBNull.Value);
         }
         command.ExecuteNonQuery();
     }
 
-    protected abstract void ExecuteSql(string[] columns);
+    protected abstract void ExecuteSql(string?[] columns);
+    
+    /*private string[] SplitIncludingEmptyColumns(string line, char delimiter)
+    {
+        var result = new List<string>();
+        var start = 0;
+        for (var i = 0; i < line.Length; i++)
+        {
+            if (line[i] != delimiter) continue;
+            result.Add(line.Substring(start, i - start));
+            start = i + 1;
+        }
+        result.Add(line[start..]);
+        return result.ToArray();
+    } */
 }

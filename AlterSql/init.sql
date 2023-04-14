@@ -74,11 +74,8 @@ CREATE TABLE material
 (
   id SERIAL PRIMARY KEY,
   figure_id INT NOT NULL,
-  language_code CHAR(2) NOT NULL,
-  text VARCHAR(255) NOT NULL,
-  UNIQUE (figure_id, language_code, text),
-  FOREIGN KEY (figure_id) REFERENCES figure (id),
-  FOREIGN KEY (language_code) REFERENCES languages (language_code)
+  material VARCHAR(255) NOT NULL,
+  FOREIGN KEY (figure_id) REFERENCES figure (id)
 );
 
 CREATE TABLE measurement

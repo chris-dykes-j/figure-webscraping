@@ -6,7 +6,7 @@ public class PricesCsvProcessor : CsvProcessor
 {
     public PricesCsvProcessor(string outPath) : base(outPath) { }
 
-    public override string ProcessFirstLine() => "figure_id,price_with_tax,price_without_tax,\n";
+    public override string ProcessFirstLine() => "figure_id,price_with_tax,price_without_tax\n";
 
     public override string ProcessLine(string line)
     {

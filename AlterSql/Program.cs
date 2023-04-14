@@ -101,7 +101,6 @@ void InsertSeriesName(NpgsqlConnection dbConnection, List<string> columns)
     InsertData(dbConnection, "series_name", columnData);
 }
 
-
 List<string> SplitIgnoringQuotes(string line, char delimiter)
 {
     var result = new List<string>();

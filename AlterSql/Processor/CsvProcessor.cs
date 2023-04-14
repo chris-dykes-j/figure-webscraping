@@ -9,9 +9,9 @@ public abstract class CsvProcessor
     private readonly string _readPath;
     protected readonly NpgsqlConnection Connection;
 
-    protected CsvProcessor(string tableName, NpgsqlConnection connection)
+    protected CsvProcessor(string fileName, NpgsqlConnection connection)
     {
-        _readPath = $"/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/Output/alter-{tableName}-jp.csv";
+        _readPath = $"/home/chris/RiderProjects/FigureWebScraper/AlterNormalization/Output/alter-{fileName}-jp.csv";
         Connection = connection;
     }
 

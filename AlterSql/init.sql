@@ -112,6 +112,6 @@ CREATE TABLE blog_url
 (
   id SERIAL PRIMARY KEY,
   figure_id INT NOT NULL,
-  blog_url VARCHAR(255) NOT NULL UNIQUE,
+  blog_url VARCHAR(255) NOT NULL,
   FOREIGN KEY (figure_id) REFERENCES figure(id)
 );

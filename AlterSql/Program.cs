@@ -20,13 +20,13 @@ var csvProcessors = new List<CsvProcessor>
 {
     new FigureCsvProcessor("figures", connection),
     new CharacterCsvProcessor("characters", connection),
-    //new MaterialCsvProcessor("materials", connection),
-    //new MeasurementCsvProcessor("measurements", connection),
-    //new BlogUrlCsvProcessor("blog-urls", connection),
-    //new PainterCsvProcessor("painters", connection),
-    //new SculptorCsvProcessor("sculptors", connection),
-    //new ReleaseDateCsvProcessor("release-dates", connection),
-    new PriceCsvProcessor("prices", connection)
+    new BlogUrlCsvProcessor("blog-urls", connection),
+    new PriceCsvProcessor("prices", connection),
+    new ReleaseDateCsvProcessor("release-dates", connection),
+    new MaterialCsvProcessor("materials", connection),
+    new TwoColumnCsvProcessor("measurements", "measurement", connection),
+    new TwoColumnCsvProcessor("painters", "painter", connection),
+    new TwoColumnCsvProcessor("sculptors", "sculptor", connection)
 };
 
 foreach (var csvProcessor in csvProcessors)

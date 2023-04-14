@@ -4,7 +4,7 @@ namespace AlterSql.Processor;
 
 public class CharacterCsvProcessor : CsvProcessor
 {
-    public CharacterCsvProcessor(string tableName, NpgsqlConnection connection) : base(tableName, connection) { }
+    public CharacterCsvProcessor(string fileName, NpgsqlConnection connection) : base(fileName, connection) { }
 
     protected override void ExecuteSql(string?[] columns)
     {

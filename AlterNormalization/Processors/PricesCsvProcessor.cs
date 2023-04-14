@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace AlterNormalization.Processors;
 
 public class PricesCsvProcessor : CsvProcessor
@@ -9,7 +11,8 @@ public class PricesCsvProcessor : CsvProcessor
     public override string ProcessLine(string line)
     {
         var columns = SplitIgnoringQuotes(line, ',');
-        var price = columns[4].Replace("送料手数料別", "").Replace(",", "");
+        // var price = columns[4].Replace("送料手数料別", "").Replace(",", "").Replace("円", "");
+        var price = Regex.Replace(columns[4], "送料手数料別|,|円", "");
         const string noTax = "+税";
         const string hasTax = "（税込）";
         const string hasBothPrices = "税抜";
@@ -28,7 +31,10 @@ public class PricesCsvProcessor : CsvProcessor
     private string SplitWithTwoPrices(string price, string name)
     {
         var lines = price.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        return lines.Aggregate("", (current, line) => current + $"{name},{line},\n");
+        
+        // This sucks and needs addressed. You'll need another column for standard, limited, normal editions.
+        return lines.Aggregate("", (current, line) => 
+            current + $"{name},{line.Replace("【通常版】", "").Replace("【限定版】", "")},\n");
     }
 
     private string SplitWithoutTax(string price, string name) => $"{name},,{price}\n";
@@ -37,4 +43,5 @@ public class PricesCsvProcessor : CsvProcessor
 
     private string SplitWithBothPrices(string price, string name) => 
         $"{name},{price.Replace("（税抜", ",").TrimEnd('）')}\n";
+    
 }

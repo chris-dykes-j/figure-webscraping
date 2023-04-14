@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS languages, figure, figure_name, series_name;
+DROP TABLE IF EXISTS languages, figure, figure_name, series_name, character_name, 
+  sculptor, painter, material, measurement, price, release_date, blog_url;
 
 CREATE TABLE languages (
   language_code CHAR(2) PRIMARY KEY, 

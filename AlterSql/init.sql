@@ -105,6 +105,7 @@ CREATE TABLE price
   price_with_tax INTEGER,
   price_without_tax INTEGER,
   currency CHAR(3) NOT NULL DEFAULT 'JPY',
+  edition VARCHAR(255),
   FOREIGN KEY (figure_id) REFERENCES figure(id)
 );
 

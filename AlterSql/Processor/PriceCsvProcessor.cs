@@ -14,7 +14,8 @@ public class PriceCsvProcessor : CsvProcessor
         {
             { "figure_id", int.Parse(columns[0]!) },
             { "price_with_tax", priceWithTax },
-            { "price_without_tax", priceWithoutTax }
+            { "price_without_tax", priceWithoutTax },
+            { "edition", columns[3] }
         };
         InsertData(Connection, "price", columnData);
     }

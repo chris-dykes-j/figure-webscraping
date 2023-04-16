@@ -13,8 +13,9 @@ public class MeasurementsCsvProcessor : CsvProcessor
         var columns = SplitIgnoringQuotes(line, ',');
         var measurements = SplitFigureMeasurements(columns[5]);
         var result = "";
-        foreach (var measurement in measurements)
+        foreach (var m in measurements)
         {
+            var measurement = m.Contains('：') ? m : $"全高：{m.TrimStart()}";
             result += measurement switch
             {
                 _ when MissingCloseSquareBracket(measurement) => $"{columns[12]},{measurement}",

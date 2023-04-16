@@ -10,7 +10,7 @@ public class CharacterCsvProcessor : CsvProcessor
     {
         var columnData = new Dictionary<string, object?>
         {
-            { "figure_id", int.Parse(columns[0]) },
+            { "figure_id", int.Parse(columns[0]!) },
             { "language_code", "ja" },
             { "text", columns[1] }
         };

@@ -1,6 +1,5 @@
 using System.Data;
 using Npgsql;
-using NpgsqlTypes;
 
 namespace AlterSql.Processor;
 
@@ -53,18 +52,4 @@ public abstract class CsvProcessor
     }
 
     protected abstract void ExecuteSql(string?[] columns);
-    
-    /*private string[] SplitIncludingEmptyColumns(string line, char delimiter)
-    {
-        var result = new List<string>();
-        var start = 0;
-        for (var i = 0; i < line.Length; i++)
-        {
-            if (line[i] != delimiter) continue;
-            result.Add(line.Substring(start, i - start));
-            start = i + 1;
-        }
-        result.Add(line[start..]);
-        return result.ToArray();
-    } */
 }

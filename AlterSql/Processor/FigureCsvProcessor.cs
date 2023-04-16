@@ -17,7 +17,7 @@ public class FigureCsvProcessor : CsvProcessor
     {
         var columnData = new Dictionary<string, object?>
         {
-            { "id", int.Parse(columns[0]) },
+            { "id", int.Parse(columns[0]!) },
             { "scale", columns[3] },
             { "brand", columns[4] },
             { "origin_url", columns[5] }
@@ -29,7 +29,7 @@ public class FigureCsvProcessor : CsvProcessor
     {
         var columnData = new Dictionary<string, object?>
         {
-            { "figure_id", int.Parse(columns[0]) },
+            { "figure_id", int.Parse(columns[0]!) },
             { "language_code", "ja" },
             { "text", columns[1] }
         };
@@ -40,7 +40,7 @@ public class FigureCsvProcessor : CsvProcessor
     {
         var columnData = new Dictionary<string, object?>
         {
-            { "figure_id", int.Parse(columns[0]) },
+            { "figure_id", int.Parse(columns[0]!) },
             { "language_code", "ja" },
             { "text", columns[2] }
         };

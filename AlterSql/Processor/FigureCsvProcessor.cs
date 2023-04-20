@@ -13,19 +13,21 @@ public class FigureCsvProcessor : CsvProcessor
         InsertSeriesName(Connection, columns);
     }
 
-    void InsertFigure(NpgsqlConnection dbConnection, string?[] columns)
+    private void InsertFigure(NpgsqlConnection dbConnection, string?[] columns)
     {
+        var scaleValue = GetScaleValue(columns[3]);
         var columnData = new Dictionary<string, object?>
         {
             { "id", int.Parse(columns[0]!) },
             { "scale", columns[3] },
+            { "scale_value", scaleValue },
             { "brand", columns[4] },
             { "origin_url", columns[5] }
         };
         InsertData(dbConnection, "figure", columnData);
     }
 
-    void InsertFigureName(NpgsqlConnection dbConnection, string?[] columns)
+    private void InsertFigureName(NpgsqlConnection dbConnection, string?[] columns)
     {
         var columnData = new Dictionary<string, object?>
         {
@@ -36,7 +38,7 @@ public class FigureCsvProcessor : CsvProcessor
         InsertData(dbConnection, "figure_name", columnData);
     }
 
-    void InsertSeriesName(NpgsqlConnection dbConnection, string?[] columns)
+    private void InsertSeriesName(NpgsqlConnection dbConnection, string?[] columns)
     {
         var columnData = new Dictionary<string, object?>
         {
@@ -45,5 +47,13 @@ public class FigureCsvProcessor : CsvProcessor
             { "text", columns[2] }
         };
         InsertData(dbConnection, "series_name", columnData);
+    }
+
+    private static int? GetScaleValue(string? input)
+    {
+        if (string.IsNullOrEmpty(input)) return null;
+        var parts = input.Split('/');
+        if (parts.Length != 2) return null;
+        return int.TryParse(parts[1], out var x) ? x : null;
     }
 }

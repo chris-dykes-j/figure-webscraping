@@ -13,6 +13,7 @@ CREATE TABLE figure
 (
   id SERIAL PRIMARY KEY,
   scale VARCHAR(4),
+  scale_value INT,
   brand VARCHAR(255),
   origin_url VARCHAR(255) NOT NULL
 );

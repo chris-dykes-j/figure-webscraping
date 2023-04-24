@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS languages, figure, figure_name, series_name, character_name, 
-  sculptor, painter, material, measurement, price, release_date, blog_url;
+  sculptor, painter, material, measurement, price, release_date, blog_url, image_url;
 
 CREATE TABLE languages (
   language_code CHAR(2) PRIMARY KEY, 
@@ -117,3 +117,11 @@ CREATE TABLE blog_url
   blog_url VARCHAR(255) NOT NULL,
   FOREIGN KEY (figure_id) REFERENCES figure(id)
 );
+
+CREATE TABLE image_url
+(
+  id SERIAL PRIMARY KEY,
+  figure_id INT NOT NULL,
+  image_url VARCHAR(255) NOT NULL,
+  FOREIGN KEY (figure_id) REFERENCES figure(id)
+)

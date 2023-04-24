@@ -26,7 +26,8 @@ var csvProcessors = new List<CsvProcessor>
     new MaterialCsvProcessor("materials", connection),
     new TwoColumnCsvProcessor("measurements", "measurement", connection),
     new TwoColumnCsvProcessor("painters", "painter", connection),
-    new TwoColumnCsvProcessor("sculptors", "sculptor", connection)
+    new TwoColumnCsvProcessor("sculptors", "sculptor", connection),
+    new ImageFileProcessor("figures", connection)
 };
 
 foreach (var csvProcessor in csvProcessors)

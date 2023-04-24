@@ -41,6 +41,6 @@ public class ImageFileProcessor : CsvProcessor
                 _ => null
             };
         
-        return Directory.GetFiles(directory!).Select(image => image.Replace(path, "anime-figures.moe/")).ToList();
+        return Directory.GetFiles(directory!).Select(image => image.Replace(path, "https://images.anime-figures.moe/")).ToList();
     }
 }

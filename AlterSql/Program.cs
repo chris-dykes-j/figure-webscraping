@@ -2,7 +2,7 @@
 using Npgsql;
 
 const string connectionString = "Host=localhost;Username=chris;Password=;Database=figures";
-const string initScriptPath = "/home/chris/RiderProjects/FigureWebScraper/AlterSql/init.sql";
+const string initScriptPath = "/home/chris/RiderProjects/figure-webscraping/AlterSql/init.sql";
 
 // Init tables
 using var connection = new NpgsqlConnection(connectionString);
